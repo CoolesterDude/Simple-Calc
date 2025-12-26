@@ -3,7 +3,7 @@ package Blake;
 
 import java.util.Scanner;
 
-public class Main {
+public class coolSimpleCalc {
     public static void main(String[] args) {
 
         double num1 = 0; //initializing variables
