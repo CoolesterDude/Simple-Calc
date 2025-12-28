@@ -14,12 +14,15 @@ public class coolSimpleCalc {
         Scanner input = new Scanner(System.in); //Initialization of scanner must be outside while loop or it could cause minor performance issues
         while (true) {
             num1 = readNumber(input, "What is your first number in the operation?"); //I realized I can use method(input, "string") to save space and move error logic to method
+
             num2 = readNumber(input, "What is your second number in the operation?");
+
             System.out.println("Would you like to Add, Subtract, Multiply, or Divide?");
             operator = input.next().toLowerCase();
             input.nextLine();
 
             result = calculate(num1, num2, operator);
+
             System.out.println("Your result is " + String.format("%.2f", result));
 
             System.out.println("Would you like to calculate another operation? (Yes/No)");
@@ -39,16 +42,14 @@ public class coolSimpleCalc {
         while (true) {
             System.out.println(prompt);
             if (input.hasNextDouble()) {
-                double value = input.nextDouble();
-                return value;
+                return input.nextDouble();
             } else {
                 System.out.println("Please Enter a Valid Number.");
                 input.nextLine();
                 continue;
             }
         }
-    }
-
+    } //Checks for Double otherwise continues loop
     public static double calculate(double num1, double num2, String operator) {
         return switch (operator) {
             case "add", "+" -> num1 + num2;
@@ -67,5 +68,5 @@ public class coolSimpleCalc {
                 yield 0;
             }
         };
-    }
+    } //Calculator Logic
 }
