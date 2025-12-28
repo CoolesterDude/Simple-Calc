@@ -32,12 +32,11 @@ public class coolSimpleCalc {
                 input.nextLine();
                 continue;
             }
-
             System.out.println("Would you like to Add, Subtract, Multiply, or Divide?");
             operator = input.next().toLowerCase();
             input.nextLine();
 
-            calculationLogic();
+            result = calculate(num1, num2, operator);
 
             if (trueOperation) { //I have trueOperation set to true by default so unless it hits default it will stay true and output the result. The result only changes by the operator so I didn't need to output this exit logic each time.
                 System.out.println("Your result is " + String.format("%.2f", result)); //the string format is used to round up from xx.xxxxxxxxx to xx.xx
@@ -58,18 +57,23 @@ public class coolSimpleCalc {
     }
 
 
-
-    public static double calculationLogic(double num1, double num2, double result, String operator) {
-        while(true) {
-            switch (operator) {
-                case "add", "+": result = num1 + num2;break;
-                case "subtract", "-": result = num1 - num2;break;
-                case "multiply", "*", "x": result = num1 * num2;break;
-                case "divide", "/": result = num1 / num2;break;
-                default:
-                    System.out.println("Operator Undefined.");
-                    continue;
+    public static double calculate(double num1, double num2, String operator) {
+        return switch (operator) {
+            case "add", "+" -> num1 + num2;
+            case "subtract", "-" -> num1 - num2;
+            case "multiply", "*", "x" -> num1 * num2;
+            case "divide", "/" -> {
+                if (num2 == 0) {
+                    System.out.println("Cannot Divide by Zero.");
+                    yield 0;
+                } else {
+                    yield num1 / num2;
+                }
             }
-        }
+            default -> {
+                System.out.println("Operator " + operator + " Undefined.");
+                yield 0;
+            }
+        };
     }
 }
